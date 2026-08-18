@@ -1,0 +1,229 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Invoice Extractor</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/style.css' %}"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="decorative-circle"></div>
+
+
+<div class="container dashboard">
+
+    <nav class="topbar">
+
+        <div>
+
+            <a href="{% url 'dashboard' %}">
+                INVOICE AI
+            </a>
+
+            <span
+                style="
+                    color: var(--gray);
+                    font-size: 11px;
+                    letter-spacing: 1px;
+                    text-transform: uppercase;
+                "
+            >
+                Intelligent Document Extraction
+            </span>
+
+        </div>
+
+
+        <a
+            href="{% url 'extract_invoice' %}"
+            class="primary-btn"
+        >
+            + Extract Invoice
+        </a>
+
+    </nav>
+
+
+    <section class="dashboard-header">
+
+        <div>
+
+            <h1>
+                Invoice<br>
+                <span style="color: var(--coral);">
+                    Extractor.
+                </span>
+            </h1>
+
+            <p>
+                Upload your invoices, define the information
+                you need, and let AI extract it automatically.
+            </p>
+
+        </div>
+
+
+        <div
+            style="
+                width: 170px;
+                height: 170px;
+                border: 1px solid rgba(232,90,79,0.35);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                flex-shrink: 0;
+            "
+        >
+
+            <div
+                style="
+                    width: 115px;
+                    height: 115px;
+                    border: 1px dashed rgba(232,90,79,0.4);
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+                    font-size: 10px;
+                    font-weight: 700;
+                    letter-spacing: 1.5px;
+                    color: var(--coral);
+                    text-transform: uppercase;
+                "
+            >
+                AI<br>
+                POWERED
+            </div>
+
+        </div>
+
+    </section>
+    <section class="dashboard-actions">
+        <a
+            href="{% url 'extract_invoice' %}"
+            class="dashboard-action">
+
+            <div>
+
+                <h3>
+                    Extract Invoice
+                </h3>
+
+                <p>
+                    Upload one or multiple PDF invoices
+                    and extract custom information.
+                </p>
+
+            </div>
+
+
+            <div class="arrow">
+                →
+            </div>
+
+        </a>
+
+
+        <a
+            href="{% url 'invoice_list' %}"
+            class="dashboard-action">
+
+            <div>
+
+                <h3>
+                    View Invoices
+                </h3>
+
+                <p>
+                    Browse uploaded documents and
+                    review AI extraction results.
+                </p>
+
+            </div>
+
+
+            <div class="arrow">
+                →
+            </div>
+
+        </a>
+
+
+    </section>
+
+<section class="stats">
+
+    <div class="stat-card">
+        <span>Total</span>
+        <strong>{{ total_invoices }}</strong>
+        <small>Invoices</small>
+    </div>
+
+    <div class="stat-card">
+        <span>AI</span>
+        <strong>{{ extracted_invoices }}</strong>
+        <small>Extracted</small>
+    </div>
+
+    <div class="stat-card">
+        <span>Reports</span>
+        <strong>{{ total_reports }}</strong>
+        <small>Generated</small>
+    </div>
+
+</section>
+
+    <section
+        style="
+            margin-top: 70px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            color: var(--gray);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+        "
+    >
+
+        <span>
+            AI Invoice Extraction System
+        </span>
+
+        <span>
+            PDF • AI • SUPABASE
+        </span>
+
+    </section>
+
+
+</div>
+
+
+</body>
+
+</html>

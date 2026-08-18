@@ -1,0 +1,102 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Extract Invoice</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/style.css' %}"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+    <a href="{% url 'dashboard' %}">
+        ← Dashboard
+    </a>
+
+    <div class="page-header">
+
+        <h1>
+            Extract Invoice
+        </h1>
+
+        <p>
+            Upload multiple PDF invoices and enter
+            the information you want to extract.
+        </p>
+
+    </div>
+
+    {% if error %}
+
+        <div class="error">
+            {{ error }}
+        </div>
+
+    {% endif %}
+
+    <form
+        method="POST"
+        enctype="multipart/form-data"
+        class="extract-form"
+    >
+
+        {% csrf_token %}
+
+
+        <label for="invoice_files">
+            Invoice Files
+        </label>
+
+        <input
+            type="file"
+            id="invoice_files"
+            name="invoice_files"
+            accept=".pdf"
+            multiple
+            required
+        >
+
+        <label for="custom_field">
+            Field to Extract
+        </label>
+
+        <input
+            type="text"
+            id="custom_field"
+            name="custom_field"
+            placeholder="Example: Date of Issue"
+            required
+        >
+
+        <button
+            type="submit"
+            class="primary-btn"
+        >
+            Extract Data
+        </button>
+
+    </form>
+
+
+</div>
+
+
+</body>
+
+</html>

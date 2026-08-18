@@ -1,0 +1,172 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>View Invoices</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/style.css' %}"
+    >
+
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <div class="topbar">
+
+        <div class="topbar-left">
+
+            <a href="{% url 'dashboard' %}">
+                ← Dashboard
+            </a>
+
+            <h1>
+                View Invoices
+            </h1>
+
+        </div>
+
+
+        <a
+            href="{% url 'download_report' %}"
+            class="primary-btn"
+        >
+            Download Report
+        </a>
+
+    </div>
+
+
+    {% if invoices %}
+
+        <div class="invoice-list">
+
+
+            {% for invoice in invoices %}
+
+
+                <div class="invoice-card">
+
+    <div>
+
+        <h3>
+            {{ invoice.original_filename }}
+        </h3>
+
+        <div class="result-box">
+
+            <span class="result-label">
+                Extracted Information
+            </span>
+
+            <div class="result-value">
+                {{ invoice.extracted_value }}
+            </div>
+
+        </div>
+
+        <small>
+            Uploaded {{ invoice.uploaded_at }}
+        </small>
+
+    </div>
+
+
+    <div class="actions">
+
+        <a 
+    href="{% url 'download_pdf' invoice.id %}" 
+    target="_blank"
+    class="pdf-link"
+>
+    View Original PDF
+</a>
+
+        <a
+            href="{% url 'download_result' invoice.id %}"
+        >
+            Download AI Result
+        </a>
+
+
+        <form
+            method="POST"
+            action="{% url 'delete_invoice' invoice.id %}"
+        >
+
+            {% csrf_token %}
+
+            <button
+                type="submit"
+                class="delete-btn"
+                onclick="return confirm('Delete this invoice?')"
+            >
+                Delete
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+            {% endfor %}
+
+
+        </div>
+
+
+    {% else %}
+
+
+        <div class="empty">
+
+
+            <h2>
+                No invoices yet
+            </h2>
+
+
+            <p>
+                Upload your first invoice to extract data.
+            </p>
+
+
+            <a
+                href="{% url 'extract_invoice' %}"
+                class="primary-btn"
+            >
+
+                Extract Invoice
+
+            </a>
+
+
+        </div>
+
+
+    {% endif %}
+
+
+</div>
+
+
+</body>
+
+</html>
